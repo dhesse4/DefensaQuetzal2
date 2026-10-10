@@ -69,23 +69,26 @@ public class ModulosVuelo extends Modulos
         }
     }
 
-
+    // Metodo para reunir datos en la mision
     @Override
     public void procesarCiclo(Mision mision)
     {
-        if (!getActivo()) {
+        if (!getActivo()) 
+        { // Si el modulo no esta activo, no pasa anda
             System.out.println("El módulo " + getId() + " no está activo.");
             return;
         }
 
-        if (mision.getEnergiaDisponible() < consumoEnergia) {
+        if (mision.getEnergiaDisponible() < consumoEnergia) //Si no hay energia suficiente, el modulo no puede trabajar
+        { 
             System.out.println("No hay suficiente energía para el módulo " + getId() + ".");
             return;
         }
-
+        
+        //Si hay enegria y esta activo, se suben los datos a la orbita en base a la capacidad del modulo
         mision.setDatosOrbita(mision.getDatosOrbita() + cantidadDatos);
         mision.actualizarEnergia(consumoEnergia);
-        totalHistorico += cantidadDatos; // Requiere cambiar totalHistorico a Double
+        totalHistorico += cantidadDatos;  // Se guarda el totalHistorico de datoas recibidos
         cantidadCiclos++;
     }
 

@@ -1,4 +1,4 @@
-public class ModulosEnegia extends Modulos
+public class ModulosEnegia extends Modulos //Debia ser energia pero funciona
 {
     private Double cantidadEnergia; 
     private Double energiaGenerada;
@@ -39,10 +39,11 @@ public class ModulosEnegia extends Modulos
         this.cantidadCiclos = cantidadCiclos;
     }
 
+    //Metodo sobrescrito, donde el modulo de energia le da su cantidad de energia a la mision para que pueda ser usado por los otros modulos
     @Override
     public void procesarCiclo(Mision mision)
     {
-        if(!super.getActivo())
+        if(!super.getActivo()) // si no esta activo, no puede dar energia, se muestra mensaje de error
         {
             System.out.println("El modulo " + getId() + " no esta activo, no se puede utilizar durante este ciclo.");
             return;

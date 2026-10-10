@@ -90,7 +90,7 @@ public class App
                     System.out.println(mision);
                     break;
                 
-                case 5: // se modifica toda la info de un modulo, se busca igual como en el case 2, y se inicia en 0 ya que simula un reinicio del modulo. (no estaba en el enunciado pero le da más vida al programa imo)
+                case 5: // se modifica toda la info de un modulo, se busca igual como en el case 2, y se inicia en 0 ya que simula un reinicio del modulo. 
 
                     System.out.print("Ingrese el ID del modulo a buscar: ");
                     String idBuscar = scan.nextLine();
@@ -209,16 +209,17 @@ public class App
 
                     break;
 
-                case 9:
+                case 9: // Sale del programa con un mensaje de despedida
                     System.out.println("Saliendo del programa...");
                     break;
-                default:
+                default: // En caso de que el usuario ingrese algo invalido
                     System.out.println("Opcion invalida, intente nuevamente.");
             }
         }
         scan.close();
     }
 
+    // Metodo para ordenar los modulos por costo de construccion, se hace una copia de la lista y se ordena con un bubble sort, luego se devuelve la lista ordenada.
     public static List<Modulos> ordenarModulosPorCosto(List<Modulos> modulos) 
     {   
         List<Modulos> modulosOrdenados = new ArrayList<>(modulos);
@@ -238,6 +239,7 @@ public class App
         return modulosOrdenados;
     }
 
+    // Metodo para buscar un modulo por su ID, si se encuentra se devuelve el modulo, si no se encuentra se devuelve null y se imprime un mensaje de error.
     public static Modulos BuscarporId(List<Modulos> modulos, String id) 
     {
         boolean encontrado = false;
@@ -258,6 +260,7 @@ public class App
         return null;
     }
 
+    // Metodo para agregar un modulo, se ingresan los atributos generales de la clase padre, luego dependiendo de la eleccion se piden los atributos de cada modulo independiente
     public static void agregarModulo(List<Modulos> modulos, String tipoModulo, Scanner scan) 
     {
         System.out.println("Ingrese el ID del modulo: ");
@@ -315,6 +318,7 @@ public class App
         }
     }
 
+    //Metodo para tener el resumen de todas las comunicaciones que fueron realizadas por los modulos de tierra durante la mision
     public static void resumenComunicaciones(List<Modulos> modulos, Mision mision)
     {
         int cantidadTierra = 0;

@@ -51,36 +51,37 @@ public class ModuloTierra extends Modulos
         this.totalDescargado = totalDescargado;
     }
 
+    // Metodo para descargar los datos enviados por los modulos de vuelo
     @Override
     public void procesarCiclo(Mision mision)
     {
-        if(!super.getActivo())
+        if(!super.getActivo()) // si no esta activo, se muestra mensaje de error y no pasa nada.
         {
             System.out.println("El modulo " + getId() + " no esta activo, no se puede utilizar durante este ciclo.");
             return;
         }
-        if(mision.getEnergiaDisponible() < this.consumoEnergia)
+        if(mision.getEnergiaDisponible() < this.consumoEnergia) // si la mision no tiene suficiente energia para abastecer el modulo, no funciona
         {
             System.out.println("No hay suficiente energia para procesar el modulo " + getId() + ".");
             return;
         }
-        if(mision.getDatosOrbita() <= 0)
+        if(mision.getDatosOrbita() <= 0) //Si no hay datos para descargar, no sucede nada
         {
             System.out.println("No hay datos de la mision para descargar en el modulo " + getId() + ".");
             return;
         }
         else
         {
-            if(mision.getDatosOrbita() < this.capacidadDescarga)
+            if(mision.getDatosOrbita() < this.capacidadDescarga) // si hay menos datos que la capacidad de descarga, se bajan todos los datos de la mision
             {
                 this.totalDescargado += mision.getDatosOrbita();
                 mision.setDatosDescargados(this.totalDescargado);
                 mision.setDatosOrbita(0.0);
                 mision.actualizarEnergia(consumoEnergia);
             }
-            else
+            else // Si hay mas datos que la capacidad, simplemente se descarga la capacidad maxima de datos del modulo, dejando los demas en orbita
             {
-                this.totalDescargado += this.capacidadDescarga;
+                this.totalDescargado += this.capacidadDescarga; // Se guarda el total descargado por el modulo para sumarlo a su total para el resumen de coms
                 mision.setDatosDescargados(this.totalDescargado);
                 mision.reducirDatosOrbita(this.capacidadDescarga);
                 mision.actualizarEnergia(consumoEnergia);
